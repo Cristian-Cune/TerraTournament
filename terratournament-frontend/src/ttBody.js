@@ -2,7 +2,7 @@ import { LitElement, html, css } from 'lit-element';
 import {sessionEstablish, removeSession, read, writeGameOptions, readGameOptions} from './storage.js';
 
 
-const host = "localhost:8081";
+const host = "http://localhost:8081";
 
 export class ttBody extends LitElement {
     static get properties() {
@@ -241,7 +241,10 @@ export class ttBody extends LitElement {
         console.log("FAC POST LA "+url)
         let response = fetch(url, {
             method: 'POST',
-            body: JSON.stringify(read())
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(read()[0])
         }).then(function(response) {
             return response.json();
         }).then(function(data) {
