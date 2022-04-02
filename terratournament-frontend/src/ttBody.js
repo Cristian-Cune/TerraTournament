@@ -126,6 +126,7 @@ export class ttBody extends LitElement {
         }  
           
         #gamemenu {
+          background-color: rgba(25, 56, 82, 0.50);
           display: block;
           color: white;
           font-size: 20px;
@@ -149,12 +150,54 @@ export class ttBody extends LitElement {
           
           
           #gamemenu #container #up {
+            padding-left:50px;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 100px;
             display: block;
             flex-grow: 1;
             flex-shrink: 1;
             flex-basis: auto;
             align-self: auto;
             order: 0;
+          }
+          
+          #gamemenu #container #up select{
+            display: block;
+            margin-top: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 10px 20px 10px;
+            box-shadow: 0px 0px 9px -1px #3dc21b;
+            background-color: #44c767;
+            border-radius: 21px;
+            border: 2px solid #18ab29;
+            cursor: pointer;
+            color: #ffffff;
+            font-size: 20px;
+            text-decoration: none;
+            text-shadow: 0px 2px 2px #2f6627;
+          }
+
+          #gamemenu #container #up input{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top:50px;
+            padding: 10px 20px 10px;
+            box-shadow: 0px 0px 9px -1px #3dc21b;
+            background-color: #44c767;
+            border-radius: 21px;
+            border: 2px solid #18ab29;
+            cursor: pointer;
+            color: #ffffff;
+            font-size: 20px;
+            text-decoration: none;
+            text-shadow: 0px 2px 2px #2f6627;
+          }
+          
+          #gamemenu #container #up td{
+            align-items: center;
           }
           
           #gamemenu #container #down {
@@ -165,6 +208,7 @@ export class ttBody extends LitElement {
             align-self: auto;
             order: 0;
           }
+          
         #playersmenu table td {
           text-align:center;
           font-size: 25px;
@@ -318,36 +362,43 @@ export class ttBody extends LitElement {
                                             <tr>
                                                 <td>You are the leader!</td>
                                             </tr>
-                                            <tr>
+                                            <tr>    
                                                 <td>
                                                     Invite your friends using the room code, choose the game rules and have fun!
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <select>
-                                                        <option value="" disabled selected>Rounds</option>
-                                                        <option value="1">1</option>
-                                                        <option value="3">3</option>
-                                                        <option value="5">5</option>
-                                                        <option value="8">8</option>
-                                                    </select>
+                                                    <form @submit="_startGame">
+                                                        <select>
+                                                            <option value="" disabled selected>Rounds</option>
+                                                            <option value="1">1</option>
+                                                            <option value="3">3</option>
+                                                            <option value="5">5</option>
+                                                            <option value="8">8</option>
+                                                        </select>
+                                                        <select>
+                                                            <option value="" disabled selected>Guessing time</option>
+                                                            <option value="60">1 minute</option>
+                                                            <option value="90">1:30 minutes</option>
+                                                            <option value="120">2 minutes</option>
+                                                        </select>
+                                                        <input type="submit" value="Start game">
+                                                    </form>
+                                                    
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <select>
-                                                        <option value="" disabled selected>Guessing time</option>
-                                                        <option value="60">1 minute</option>
-                                                        <option value="90">1:30 minutes</option>
-                                                        <option value="120">2 minutes</option>
-                                                    </select>
+                                                    
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>    
                                     <div id="down">
-                                        <p> ROOM CODE: ${this.roomCode} </p>
+                                        <p>
+                                            <div style="margin-left:200px;">ROOM CODE: ${this.roomCode}
+                                        </p>
                                     </div>
                                     
                                 ` : html`
@@ -374,6 +425,12 @@ export class ttBody extends LitElement {
         sessionEstablish({username: "Guest"+random, durationInSeconds: 90, numberOfRounds: 3})
         this.currentPage = 4;
         this.dispatchEvent(new CustomEvent('page-update', { detail: 4 }));
+    }
+
+    _startGame(event) {
+        event.preventDefault();
+        let form = event.target
+        // CERERE DE POST
     }
 
      _sendCodeToServer(event) {
