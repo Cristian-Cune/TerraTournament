@@ -1,0 +1,18 @@
+# IDEA Intellij #
+.idea
+*.iml
+*/*.iml
+
+# Generated files #
+target
+**/test-output
+**/target
+**/out.txt
+*.project
+*.prefs
+*.classpath
+*.cer
+*.pem
+
+# logs #
+logs/*
